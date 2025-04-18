@@ -122,3 +122,26 @@ You'll use this file to specify dependencies, as well as details about the proje
 - **Apache Airflow Docs:** https://airflow.apache.org/docs/apache-airflow/stable/index.html
 - **UV installation:** https://docs.astral.sh/uv/getting-started/installation/
 - **UV Docs :** https://docs.astral.sh/uv/#installation
+
+
+
+### Problem
+
+while running `git add.` getting this error:
+
+```
+warning: could not open directory 'logs/scheduler/latest/': Function not implemented
+```
+
+### Solution
+
+- Create or edit the `.gitignore` file in the root of your Git repository.
+
+- Add the following line to the `.gitignore` file:
+
+```
+logs/
+```
+
+- Save the file and then try `git add .` again.
+
