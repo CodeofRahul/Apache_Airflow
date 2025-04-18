@@ -1,0 +1,46 @@
+apache airflow is not built for window so need to install it using docker. it'll download relevent images and run it through containers
+
+1. Install docker and docker-compose (pip/uv install docker and docker-compose)
+
+2.  this is docker-compose.yaml file: curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.10.5/docker-compose.yaml'
+
+    convert it for window by removing -LfO from start and adding -o docker-compose.yaml at the end. then run it in command prompt (curl 'https://airflow.apache.org/docs/apache-airflow/2.10.5/docker-compose.yaml' -o 'docker-compose.yaml')
+
+3.  create these four directories:
+    ./dags - you can put your DAG files here.
+    ./logs - contains logs from task execution and scheduler.
+    ./config - you can add custom log parser or add airflow_local_settings.py to configure cluster policy.
+    ./plugins - you can put your custom plugins here.
+
+
+4. For other operating systems, It may give a warning that AIRFLOW_UID is not set. so, manually create an .env file in the same folder as docker-compose.yaml with this content to get rid of the warning:
+
+    paste it inside the file: AIRFLOW_UID=50000
+
+5. Initialize the database
+On all operating systems, you need to run database migrations and create the first user account. To do this, run.
+
+    >> for older version of docker run this: docker-compose up airflow-init
+                            or
+    >> for new version of docker run this: docker compose up airflow-init
+
+    >> After initialization is complete, you should see a message like this:
+
+    airflow-init_1       | Upgrades done
+    airflow-init_1       | Admin user airflow created
+    airflow-init_1       | 2.10.5
+    start_airflow-init_1 exited with code 0
+
+>> Now you can start all services:
+docker-compose up
+        or
+docker-compose up -d
+
+The account created has the login airflow and the password airflow.
+
+
+6. To delete inbuilt dags
+docker-compose down
+        or
+docker-compose down -v
+ 

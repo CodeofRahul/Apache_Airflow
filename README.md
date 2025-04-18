@@ -33,3 +33,92 @@ This repo implements the idea of programmatically authoring, scheduling, and mon
 
 ![image](https://github.com/user-attachments/assets/9ee4fb8f-b6ed-49c5-a067-982eb8db16a5)
 
+
+### **UV Commands:**
+
+- `uv run filename.py`: To run a Python script.
+- `pip install uv`: To install uv from PyPI.
+- `uv --version`: Check the installed UV version.
+- `uv venv`: Create a new virtual environment.
+- `.venv\Scripts\activate`: Activate the virtual environment (Windows).
+- `uv add <package_name>[==<version>]`: Adds dependency to your project's `pyproject.toml` and installs it into the active virtual environment(e.g., uv add flask==2.1.0).
+- `uv add -r requirements.txt`: Add all dependencies from `requirements.txt`.
+- `uv remove <package_name>`: Removes a dependency from `pyproject.toml` and uninstalls it 
+- `deactivate`: Deactivate the virtual environment.
+- `uv sync`: to manually update the environment
+- `uv lock`: to lock the environment & updates the lock file
+
+
+
+## **Creating a new project**
+
+- You can create a new Python project using the uv init command:
+
+```
+uv init hello-world
+cd hello-world
+```
+
+- Alternatively, you can initialize a project in the working directory:
+
+```
+mkdir hello-world
+cd hello-world
+uv init
+```
+
+uv will create the following files:
+
+```
+.
+├── .python-version
+├── README.md
+├── main.py
+└── pyproject.toml
+```
+
+The main.py file contains a simple "Hello world" program. Try it out with uv run:
+
+```
+uv run main.py
+```
+
+### Project structure
+
+A project consists of a few important parts that work together and allow uv to manage your project. In addition to the files created by uv init, uv will create a virtual environment and uv.lock file in the root of your project the first time you run a project command, i.e., uv run, uv sync, or uv lock.
+
+A complete listing would look like:
+
+```
+.
+├── .venv
+│   ├── bin
+│   ├── lib
+│   └── pyvenv.cfg
+├── .python-version
+├── README.md
+├── main.py
+├── pyproject.toml
+└── uv.lock
+```
+
+The `pyproject.toml` contains metadata about your project:
+
+```pyproject.toml
+
+[project]
+name = "hello-world"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+dependencies = []
+```
+
+You'll use this file to specify dependencies, as well as details about the project such as its description or license. You can edit this file manually, or use commands like uv add and uv remove to manage your project from the terminal.
+
+
+### **Docs:**
+
+- **Apache Airflow Docs:** https://airflow.apache.org/docs/apache-airflow/stable/index.html
+- **UV installation:** https://docs.astral.sh/uv/getting-started/installation/
+- **UV Docs :** https://docs.astral.sh/uv/#installation
